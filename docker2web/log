@@ -1,0 +1,15 @@
+Sending build context to Docker daemon 3.584 kBSending build context to Docker daemon 3.584 kB
+Step 1 : FROM alpinerubyimg
+ ---> ccb9d911ab30
+Step 2 : MAINTAINER y0zg
+ ---> Using cache
+ ---> 3b419c3d7033
+Step 3 : RUN apk update && apk add ruby
+ ---> Running in 9aff0997e3dc
+fetch http://dl-cdn.alpinelinux.org/alpine/v3.6/main/x86_64/APKINDEX.tar.gz
+[91mERROR: http://dl-cdn.alpinelinux.org/alpine/v3.6/main: temporary error (try again later)
+[0mfetch http://dl-cdn.alpinelinux.org/alpine/v3.6/community/x86_64/APKINDEX.tar.gz
+[91mERROR: http://dl-cdn.alpinelinux.org/alpine/v3.6/community: temporary error (try again later)
+[0mv3.6.2-191-gf98d79930f [http://dl-cdn.alpinelinux.org/alpine/v3.6/main]
+v3.6.2-190-ga5d68c47df [http://dl-cdn.alpinelinux.org/alpine/v3.6/community]
+2 errors; 8437 distinct packages available

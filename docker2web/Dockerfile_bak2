@@ -1,0 +1,9 @@
+FROM alpine
+MAINTAINER y0zg
+RUN echo nameserver 192.168.1.1 >> /etc/resolv.conf
+#sed -i -e 's/dl-cdn.alpinelinux.org/147.75.32.21/' /etc/apk/repositories
+RUN echo http://147.75.32.21/alpine/v3.6/main >> /etc/apk/repositories
+RUN apk update && apk add ruby
+ADD counter.rb counter.rb
+EXPOSE 4567
+ENTRYPOINT ["ruby","counter.rb"]
