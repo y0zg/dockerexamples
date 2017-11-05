@@ -1,0 +1,6 @@
+version: "2"
+services:
+ kv-store_1:
+  image: redis
+ kv-store_2:
+  image: redis

@@ -1,0 +1,24 @@
+version: '2'
+# 3 services ELK
+services:
+  elasticsearch:
+#we dont need to provide any ports for E as all services are in the same network
+    image: elasticsearch:2.2.1
+  kibana:
+#official docker image version
+    image: kibana:4.4.2
+# 1st port is docker host, 2nd is container port
+    ports:
+      - "5601:5601"
+    environment:
+      - ELASTICSEARCH_URL=http://elasticsearch:9200
+#ensure that dependency container is started first, before dependent container
+    depends_on:
+      - elasticsearch
+  logstash:
+    image: logstash:2.2.2
+    command: -e 'input { tcp { port => 5555 } } output { elasticsearch { hosts => ["elasticsearch:9200"] } }'
+    ports:
+      - "5555:5555"
+    depends_on:
+      - elasticsearch
