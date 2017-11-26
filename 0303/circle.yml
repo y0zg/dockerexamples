@@ -1,0 +1,32 @@
+machine:
+  services:
+    - docker
+
+dependencies:
+  override:
+    - if [[ "$CIRCLE_BRANCH" == staging ]]; then docker build -f Dockerfile.staging -t willrstern/sample-node .; fi;
+    - if [[ "$CIRCLE_BRANCH" == qa ]]; then docker build -f Dockerfile.qa -t willrstern/sample-node .; fi;
+    - if [[ "$CIRCLE_BRANCH" != qa ]] && [[ "$CIRCLE_BRANCH" != staging ]]; then docker build -t willrstern/sample-node .; fi;
+
+test:
+  override:
+    - docker run willrstern/sample-node npm test
+
+deployment:
+  production:
+    branch: master
+    commands:
+      - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
+      - ./deploy.sh
+  staging:
+    branch: staging
+    commands:
+      - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
+      - docker tag willrstern/sample-node:latest willrstern/sample-node:staging
+      - ./deploy.staging.sh
+  qa:
+    branch: qa
+    commands:
+      - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
+      - docker tag willrstern/sample-node:latest willrstern/sample-node:qa
+      - ./deploy.qa.sh
