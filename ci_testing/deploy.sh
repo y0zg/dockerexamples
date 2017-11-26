@@ -1,12 +1,12 @@
 #!/bin/bash
-docker build -t willrstern/sample-node .
-docker push willrstern/sample-node
+docker build -t y0zh/sample-node .
+docker push y0zh/sample-node
 
 ssh deploy@159.203.127.59 << EOF
-docker pull willrstern/sample-node:latest
+docker pull y0zh/sample-node:latest
 docker stop web || true
 docker rm web || true
-docker rmi willrstern/sample-node:current || true
-docker tag willrstern/sample-node:latest willrstern/sample-node:current
-docker run -d --net app --restart always --name web -p 3000:3000 willrstern/sample-node:current
+docker rmi y0zh/sample-node:current || true
+docker tag y0zh/sample-node:latest y0zh/sample-node:current
+docker run -d --net app --restart always --name web -p 3000:3000 y0zh/sample-node:current
 EOF

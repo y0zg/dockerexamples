@@ -22,13 +22,13 @@ services:
     ports:
       - 3306:3306
   migrations:
-    image: willrstern/test-db-migrations
+    image: y0zh/test-db-migrations
     environment:
       - NODE_ENV=development
     depends_on:
       - mysql
   fixtures:
-    image: willrstern/test-db-fixtures:latest
+    image: y0zh/test-db-fixtures:latest
     environment:
       - NODE_ENV=development
     depends_on:
