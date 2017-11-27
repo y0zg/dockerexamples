@@ -2,7 +2,7 @@
 docker build -t y0zh/sample-node .
 docker push y0zh/sample-node
 
-ssh deploy@159.203.127.59 << EOF
+ssh sh -p 64788 ubuntu@18.221.30.52<< EOF
 docker pull y0zh/sample-node:latest
 docker stop web || true
 docker rm web || true
