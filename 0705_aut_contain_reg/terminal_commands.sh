@@ -15,14 +15,14 @@ docker run -d --net apps --name register1 \
   -e constraint:type==apps \
   -e affinity:container!=register* \
   -e DEBUG=true \
-  willrstern/docker-swarm-registrator
+  y0zh/docker-swarm-registrator
 
 docker run -d --net apps --name register2 \
   -v /var/run/docker.sock:/var/run/docker.sock \
   -e constraint:type==apps \
   -e affinity:container!=register* \
   -e DEBUG=true \
-  willrstern/docker-swarm-registrator
+  y0zh/docker-swarm-registrator
 
 # you can see that etcd receives a registration for web1
 docker run --rm -it alpine /bin/sh
