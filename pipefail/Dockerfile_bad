@@ -1,0 +1,2 @@
+FROM buildpack-deps:stretch-curl
+RUN wget -O - https://google/ | wc -l
