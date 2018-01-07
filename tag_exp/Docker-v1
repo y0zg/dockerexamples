@@ -1,0 +1,2 @@
+FROM debian:stretch
+RUN echo 1 > /version

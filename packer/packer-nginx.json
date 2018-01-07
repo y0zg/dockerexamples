@@ -1,0 +1,28 @@
+{
+    "builders" : [
+      {
+	  "type" : "docker",
+	  "image" : "debian:stretch",
+	  "commit" : true,
+	  "changes" : [
+	      "CMD [\"nginx\", \"-g\", \"daemon off;\"]",
+	      "EXPOSE 80"
+	  ]
+      }
+    ],
+    "provisioners" : [
+	{
+	    "type" : "shell",
+	    "inline" : ["apt-get update && apt-get install -y nginx"]
+	}
+    ],
+    "post-processors" : [
+	[
+	    {
+		"type" : "docker-tag",
+		"repository" : "packer-nginx",
+		"tag" : "1.0"
+	    }
+	]
+    ]
+}
